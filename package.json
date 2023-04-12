@@ -4,6 +4,8 @@
   "description": "El proyecto consiste en una aplicación en ambiente web, en la cual llevará el",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
