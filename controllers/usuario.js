@@ -4,11 +4,10 @@ const bcryptjs = require('bcryptjs');
 const Usuario = require('../models/usuario');
 
 const getUsuarios = async(req = request, res = response) =>{
-    const query = {estado: true};
 
     const listaUsuarios = await Promise.all([
-        Usuario.countDocuments(query),
-        Usuario.find(query)
+        Usuario.countDocuments(),
+        Usuario.find()
     ]);
 
     res.json({
@@ -18,6 +17,10 @@ const getUsuarios = async(req = request, res = response) =>{
  }
 
  const postUsuario = async (req = request, res = response) => {
+    if (req.body.rol == "") {
+        req.body.rol = "HUÉSPED"
+    }
+
     const {nombre, correo, password, rol} = req.body;
     const usuarioDB = new Usuario({ nombre, correo, password, rol});
 
@@ -34,29 +37,43 @@ const getUsuarios = async(req = request, res = response) =>{
 
  const putUsuario = async (req = request, res = response) => {
     const {id} = req.params;
+    const user = req.usuario._id;
+    const idUser = user.toString();
 
-    const {_id, rol, ...resto} = req.body;
+    if (id === idUser) {
+        const {_id, role,...resto} = req.body;
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(resto.password, salt);
+        const userEditado = await Usuario.findByIdAndUpdate(id, resto, {new: true});
+        res.status(200).json({
+            msg: 'User updated',
+            userEditado
+        })
+    } else{
+        res.status(401).json({
+            msg: 'Unauthorized you can only update your own account'
 
-    const salt = bcryptjs.genSaltSync();
-    resto.password = bcryptjs.hashSync(resto.password, salt);
-
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto);
-
-    res.json({
-        msg: 'PUT user',
-        usuarioEditado
-    });
+        })
+    }
  }
 
  const deleteUsuario = async(req = request, res = response) => {
     const {id} = req.params;
+    const user = req.usuario._id;
+    const idUser = user.toString();
 
-    const usuarioEliminado = await Usuario.findByIdAndDelete(id);
+    if(id === idUser){
+        const userEliminado = await Usuario.findByIdAndDelete(id);
+        res.status(200).json({
+            msg: 'User deleted',
+            userEliminado
+        })
+    }else{
+        res.status(401).json({
+            msg: 'Unauthorized you can only delete your own account'
 
-    res.json({
-        msg: 'DELETE user',
-        usuarioEliminado
-    });
+        })
+    }
  }
 
  module.exports = {
