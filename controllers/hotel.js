@@ -27,14 +27,14 @@ const getHoteles = async(req = request, res = response) =>{
 }
 
  const postHotel = async (req = request, res = response) => {
-    const {direccion, ...body} = req.body;
+    const {...body} = req.body;
 
     //validación si existe un hotel en la db
     const hotelDB = await Hotel.findOne( { nombre: body.nombre } );
 
     if ( hotelDB ) {
         return res.status(400).json({
-            mensajeError: `El hotel ${ hotelDB.nombre } ya existe en la DB`
+            msg: `El hotel ${ hotelDB.nombre } ya existe en la DB`
         });
     }
 
@@ -42,7 +42,7 @@ const getHoteles = async(req = request, res = response) =>{
     //Generar data a guardar
     const data = {
         ...body,
-        nombre: body.nombre.toUpperCase(),
+        // nombre: body.nombre.toUpperCase(),
         usuario: req.usuario._id
     }
 
@@ -51,8 +51,7 @@ const getHoteles = async(req = request, res = response) =>{
     await hotel.save();
 
     res.status(201).json({
-        msg: 'POST user',
-        usuarioDB
+        hotel
     });
  }
 
