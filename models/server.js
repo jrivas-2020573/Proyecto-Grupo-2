@@ -10,7 +10,8 @@ class Server {
 
         this.paths = {
             usuario: '/api/usuarios',
-            auth: '/api/auth'
+            auth: '/api/auth',
+            hotel: '/api/hoteles'
         }
 
         this.conectarDB();
@@ -36,6 +37,7 @@ class Server {
     routes(){
         this.app.use(this.paths.usuario, require('../routes/usuario'));
         this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.hotel, require('../routes/hotel'));
     }
 
     listen(){
