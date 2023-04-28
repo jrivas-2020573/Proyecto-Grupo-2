@@ -28,7 +28,7 @@ const login = async(req = request, res = response) => {
 
         res.status(200).json({
             msg: 'Login Exitoso',
-            correo, password,
+            correo,
             token
         });
     } catch (error) {

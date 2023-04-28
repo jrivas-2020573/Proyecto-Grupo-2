@@ -10,9 +10,8 @@ const HotelSchema = Schema({
         required: [true, 'La dirección es obligatoria']
     },
     precioHabitacion: {
-        type: String,
-        required: [true, 'El precio es obligatorio'],
-        unique: true
+        type: Number,
+        required: [true, 'El precio es obligatorio']
     },
     habitacionesDispo: {
         type: Number,
