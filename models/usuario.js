@@ -18,6 +18,13 @@ const UsuarioSchema = Schema({
     rol: {
         type: String,
         required: true,
+    },
+    carrito: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Hotel'
+    }],
+    total: {
+        type: Number
     }
 });
 

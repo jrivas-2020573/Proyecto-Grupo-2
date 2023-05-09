@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUsuarios, postUsuario, putUsuario, deleteUsuario } = require('../controllers/usuario');
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, reservaHotel } = require('../controllers/usuario');
 const { emailExiste, RolValido, existeUserPorId } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
+const { generarFactura, mostrarFactura } = require('../controllers/factura');
 
 const router = Router();
 
@@ -36,5 +37,13 @@ router.delete('/eliminar/:id', [
     check('id').custom(existeUserPorId),
     validarCampos
 ] ,deleteUsuario);
+
+router.put('/shopCar', [
+    validarJWT
+], reservaHotel);
+
+router.post('/comprar',[validarJWT], generarFactura);
+
+router.get('/factura', [validarJWT], mostrarFactura);
 
 module.exports = router;
