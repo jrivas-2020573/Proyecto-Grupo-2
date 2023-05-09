@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "4980f0a4-cfec-40d0-a54b-fa8eb15dc30e",
+		"name": "Control Hotel grupo #3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "PostUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Daniel\",\r\n    \"correo\": \"daniel@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuarios/agregar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/usuarios/mostrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"mostrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRjZjMzOTUwNWM5OGVlNTFkMzQiLCJpYXQiOjE2ODI2NjA5NzksImV4cCI6MTY4MjY3NTM3OX0.lSmAS0zXbVRBa_5DPv5AiRTuMoS9pdSIz9EXA5zgq7w",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"nombre\": \"Jose Juan\",\r\n    \"correo\": \"joseju@gmail.com\",\r\n    \"password\": \"123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuarios/editar/644b5db7339505c98ee51d30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"editar",
+								"644b5db7339505c98ee51d30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DelUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRjZjMzOTUwNWM5OGVlNTFkMzQiLCJpYXQiOjE2ODI2NjA5NzksImV4cCI6MTY4MjY3NTM3OX0.lSmAS0zXbVRBa_5DPv5AiRTuMoS9pdSIz9EXA5zgq7w",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuarios/eliminar/644b5db7339505c98ee51d30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"eliminar",
+								"644b5db7339505c98ee51d30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LOGIN",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"daniel@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hotel",
+			"item": [
+				{
+					"name": "Post Hotel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRhNjMzOTUwNWM5OGVlNTFkMmQiLCJpYXQiOjE2ODI2NjE3NjQsImV4cCI6MTY4MjY3NjE2NH0.rvC0Wyk6Y98GgftNgMmlF-JTJNVw9fdefsZYDCUb4hQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Grand Tikal Futura\",\r\n    \"direccion\": \"Zona 11\",\r\n    \"precioHabitacion\": 1132,\r\n    \"habitacionesDispo\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/hoteles/agregar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hoteles",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hotel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/hoteles/mostrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hoteles",
+								"mostrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put hotel",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRiNzMzOTUwNWM5OGVlNTFkMzAiLCJpYXQiOjE2ODI2NjM5OTQsImV4cCI6MTY4MjY3ODM5NH0.UFsHb-XQ0myZlVQqze5LBqvVI0WUA-ZOLLa4d9ecse8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Best Western\",\r\n    \"direccion\": \"Zona 10\",\r\n    \"precioHabitacion\": 663.54,\r\n    \"habitacionesDispo\": 100\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/hoteles/editar/644b692dee9ba968df26b9a7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hoteles",
+								"editar",
+								"644b692dee9ba968df26b9a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Del Hotel",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRhNjMzOTUwNWM5OGVlNTFkMmQiLCJpYXQiOjE2ODI2NjQyMTUsImV4cCI6MTY4MjY3ODYxNX0.EBPCGmmuV5n60Wk_aJmuoSJBj08NyDiMCNPaxOftUjs",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/hoteles/eliminar/644b6af83093d837e8114dc0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hoteles",
+								"eliminar",
+								"644b6af83093d837e8114dc0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carrito",
+			"item": [
+				{
+					"name": "Reservar Habitacion",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDU5Y2MzZTY0ODg4MWZhYTUzYzY0NmYiLCJpYXQiOjE2ODM2MDkzMTYsImV4cCI6MTY4MzYyMzcxNn0.sCm5JnRdsDdPlyusKF4lUo6GlVPUMUY_UwfPqU-y0TU",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"idHotel\": \"644b5f2d339505c98ee51d48\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuarios/shopCar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"shopCar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Factura",
+			"item": [
+				{
+					"name": "Generar Factura para un usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDU5Y2MzZTY0ODg4MWZhYTUzYzY0NmYiLCJpYXQiOjE2ODM2MDY2MDQsImV4cCI6MTY4MzYyMTAwNH0.vd10QOdFDhJWcIwgRH-9CGc-qUodSMFfS9tII3z_oyQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/usuarios/comprar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"comprar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Factura",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDU5Y2MzZTY0ODg4MWZhYTUzYzY0NmYiLCJpYXQiOjE2ODM2MDkzMTYsImV4cCI6MTY4MzYyMzcxNn0.sCm5JnRdsDdPlyusKF4lUo6GlVPUMUY_UwfPqU-y0TU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/usuarios/factura",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"factura"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
