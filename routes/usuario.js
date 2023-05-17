@@ -8,7 +8,9 @@ const { generarFactura, mostrarFactura } = require('../controllers/factura');
 
 const router = Router();
 
-router.get('/mostrar', getUsuarios);
+router.get('/mostrar', [
+    validarJWT
+], getUsuarios);
 
 router.post('/agregar', [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),

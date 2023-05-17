@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Daniel\",\r\n    \"correo\": \"daniel@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Manolo\",\r\n    \"correo\": \"manolo@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"SUPER_ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,7 +41,13 @@
 					"name": "GetUsers",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRhNjMzOTUwNWM5OGVlNTFkMmQiLCJpYXQiOjE2ODQzNjAyMjEsImV4cCI6MTY4NDM3NDYyMX0.8SMxCixQHMj38HOygbXVChDoHg72pe5_a-z0MOirg0I",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/usuarios/mostrar",
 							"host": [
@@ -141,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"correo\": \"daniel@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"correo\": \"manolo@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -175,7 +181,7 @@
 						"header": [
 							{
 								"key": "x-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDRiNWRhNjMzOTUwNWM5OGVlNTFkMmQiLCJpYXQiOjE2ODI2NjE3NjQsImV4cCI6MTY4MjY3NjE2NH0.rvC0Wyk6Y98GgftNgMmlF-JTJNVw9fdefsZYDCUb4hQ",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDY1NDlhYmY5NDY3NzU2YTE1OTc3MDAiLCJpYXQiOjE2ODQzNjI5NDMsImV4cCI6MTY4NDM3NzM0M30._rez1HzPo_6WslGzajN-Q0E8bIT8YItZsaJF_X_2Qyk",
 								"type": "default"
 							}
 						],
@@ -281,6 +287,38 @@
 								"hoteles",
 								"eliminar",
 								"644b6af83093d837e8114dc0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetHotelPorNombre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Conquistador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/hoteles/buscar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"hoteles",
+								"buscar"
 							]
 						}
 					},

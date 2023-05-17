@@ -1,8 +1,9 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getHoteles, postHotel, putHotel, deleteHotel } = require('../controllers/hotel');
+const { getHoteles, postHotel, putHotel, deleteHotel, getHotelPorNombre } = require('../controllers/hotel');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { esHotelValido, hotelExiste } = require('../helpers/db-validators');
 
 const router = Router();
 
@@ -10,6 +11,7 @@ router.get('/mostrar', getHoteles);
 
 router.post('/agregar', [
     validarJWT,
+    check('nombre').custom(hotelExiste),
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('direccion', 'La direccion es olbigatoria').not().isEmpty(),
     check('precioHabitacion', 'El precio es obligatorio').not().isEmpty(),
@@ -32,5 +34,10 @@ router.delete('/eliminar/:id', [
     validarJWT,
     validarCampos
 ], deleteHotel);
+
+router.get('/buscar', [
+    check('nombre').custom(esHotelValido),
+    validarCampos
+], getHotelPorNombre);
 
 module.exports = router;

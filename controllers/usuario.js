@@ -4,18 +4,28 @@ const bcryptjs = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const Hotel = require('../models/hotel');
 
-const getUsuarios = async(req = request, res = response) =>{
 
-    const listaUsuarios = await Promise.all([
-        Usuario.countDocuments(),
-        Usuario.find()
-    ]);
-
-    res.json({
-        msg: 'GET users',
-        listaUsuarios
-    });
- }
+const  getUsuarios = async (req, res) => {
+    try {
+      const usuario = await Usuario.findById(req.usuario._id);
+      if (!usuario) {
+        return res.status(404).json({ msg: 'Usuario no encontrado' });
+      }
+  
+      // Verificar si el usuario tiene el rol de "SUPER_ADMIN"
+      if (usuario.rol !== 'SUPER_ADMIN') {
+        return res.status(403).json({ msg: 'Acceso denegado. Permiso insuficiente' });
+      }
+  
+      // Obtener todos los usuarios de la base de datos
+      const usuarios = await Usuario.find();
+  
+      res.json(usuarios);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ msg: 'Error al obtener los usuarios' });
+    }
+  };   
 
  const postUsuario = async (req = request, res = response) => {
     if (req.body.rol == "") {

@@ -1,3 +1,4 @@
+const hotel = require("../models/hotel");
 const Role = require("../models/role");
 const Usuario = require("../models/usuario")
 
@@ -25,8 +26,24 @@ const existeUserPorId = async(id) => {
     }
 }
 
+const esHotelValido = async(nombre = '') =>{
+    const existeHotelDB = await hotel.findOne({nombre});
+    if (!existeHotelDB) {
+        throw new Error(`El hotel ${nombre} no existe`);
+    }
+}
+
+const hotelExiste = async(nombre = '') => {
+    const existeHotel = await hotel.findOne({nombre});
+    if (existeHotel) {
+        throw new Error(`${nombre} ya esta registrado en la base de datos`);
+    }
+}
+
 module.exports = {
     emailExiste,
     RolValido,
-    existeUserPorId
+    existeUserPorId,
+    esHotelValido,
+    hotelExiste
 }

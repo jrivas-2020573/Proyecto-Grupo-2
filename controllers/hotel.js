@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const Hotel = require('../models/hotel');
+const Usuario = require('../models/usuario');
 
 
 const getHoteles = async(req = request, res = response) =>{
@@ -14,25 +15,31 @@ const getHoteles = async(req = request, res = response) =>{
  }
 
 
- const postHotel = async (req = request, res = response) => {
-   const {rol} = req.usuario;
-
-   if (rol === "ADMIN") {
-      const {nombre, direccion, precioHabitacion, habitacionesDispo} = req.body;
-      const hotelDB = new Hotel({nombre, direccion, precioHabitacion, habitacionesDispo});
-   
-      await hotelDB.save();
-   
-      res.status(201).json({
-         hotelDB
-      });
-   } else {
-      res.status(401).json({
-         msg: 'Unauthorized you can only create hotel if u are admin'
-      })
+const postHotel = async (req, res) => {
+   try {
+     const usuario = await Usuario.findById(req.usuario._id);
+     if (!usuario) {
+       return res.status(404).json({ msg: 'Usuario no encontrado' });
+     }
+ 
+     // Verificar si el usuario tiene el rol de "SUPER_ADMIN" o "ADMIN"
+     if (usuario.rol !== 'SUPER_ADMIN' /*&& usuario.rol !== 'ADMIN'*/) {
+       return res.status(403).json({ msg: 'Acceso denegado. Permiso insuficiente' });
+     }
+     
+     // Crear un nuevo hotel utilizando los datos del cuerpo de la solicitud
+     const nuevoHotel = new Hotel(req.body);
+ 
+     // Guardar el hotel en la base de datos
+     await nuevoHotel.save();
+ 
+     res.json({ msg: 'Hotel agregado exitosamente' });
+   } catch (error) {
+     console.log(error);
+     res.status(500).json({ msg: 'Error al agregar el hotel' });
    }
-
- }
+ };
+ 
 
  const putHotel = async (req = request, res = response) => {
    const {rol} = req.usuario;
@@ -74,9 +81,20 @@ const getHoteles = async(req = request, res = response) =>{
    }
  }
 
+const getHotelPorNombre = async(req = request, res = response) =>{
+  const {nombre} = req.body;
+
+  const hotel = await Hotel.findOne({nombre});
+
+  res.json({
+    hotel
+  })
+}
+
  module.exports = {
     getHoteles,
     postHotel,
     putHotel,
-    deleteHotel
+    deleteHotel,
+    getHotelPorNombre
  }
